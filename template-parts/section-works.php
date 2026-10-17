@@ -49,8 +49,6 @@ if ( $nabp_query->have_posts() ) {
 		),
 	);
 }
-
-$nabp_mailto = nabp_mailto_url();
 ?>
 <section id="works" class="nab-container py-20 lg:py-24" aria-labelledby="works-heading">
 	<p class="font-display text-lime text-[20px] tracking-[0.08em] mb-3" data-reveal>// selected works</p>
@@ -82,15 +80,4 @@ $nabp_mailto = nabp_mailto_url();
 			<?php echo $nabp_card_close; // phpcs:ignore WordPress.Security.EscapeOutput ?>
 		<?php endforeach; ?>
 	</div>
-
-	<?php if ( '' !== $nabp_mailto ) : ?>
-		<div class="border border-fog/15 rounded-[32px] p-10 lg:p-16 text-center" data-reveal>
-			<p class="font-display text-lime text-[20px] tracking-[0.08em] mb-4">// next step</p>
-			<h3 class="font-display text-fog text-[36px] sm:text-[48px] lg:text-[64px] leading-[1] mb-8"><?php esc_html_e( 'Punya masalah yang perlu diselesaikan?', 'nab-portfolio' ); ?></h3>
-			<a href="<?php echo esc_url( $nabp_mailto ); ?>" data-ga="email_cta_click" class="inline-flex items-center gap-3 bg-lime text-ink font-medium rounded-[32px] px-[26px] py-[12px] text-[18px] hover:opacity-90 transition-opacity">
-				<?php echo nabp_icon( 'mail' ); ?>
-				<?php esc_html_e( 'Mari diskusikan via email', 'nab-portfolio' ); ?>
-			</a>
-		</div>
-	<?php endif; ?>
 </section>

@@ -21,7 +21,7 @@ Deploy produksi = upload folder tema + aktivasi — tidak butuh Node di server.
 
 - **Appearance → Customize** — Hero, About, Contact (email, social, resume URL), Analytics (GA4 ID), Branding
 - **Case Studies** — CPT publik dengan meta box terstruktur; 3 mockup di-seed otomatis saat aktivasi tema (hapus/ganti kapan saja via WP Admin)
-- **Career / Stack Items** — urut via page attributes (kolom Order)
+- **Career / Kemampuan** — urut via page attributes (kolom Order)
 - **Client Quotes** — section testimonial muncul otomatis saat ada ≥ 1 quote published
 
 ## Catatan build
