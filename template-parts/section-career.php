@@ -29,15 +29,15 @@ if ( $nabp_query->have_posts() ) {
 	$nabp_items = array(
 		array(
 			'period' => '2021 — 2022',
-			'role'   => 'Web Developer',
+			'role'   => 'Business Development',
 			'title'  => 'Widantech',
-			'desc'   => '<p>' . esc_html__( 'Built and maintained PHP-based internal web applications for clients\' operational workflows.', 'nab-portfolio' ) . '</p>',
+			'desc'   => '<p>' . esc_html__( 'Managed end-to-end Odoo implementation for FnB Business from requirement analysis to partnership documentation, supported internal training for new academic system features for University client, and led trainer prospecting and scheduling for Nusacodes.', 'nab-portfolio' ) . '</p>',
 		),
 		array(
 			'period' => '2022 — 2023',
-			'role'   => 'Fullstack Web Developer',
+			'role'   => 'React Mentor',
 			'title'  => 'Nusacodes',
-			'desc'   => '<p>' . esc_html__( 'Developed web service features within the product team, from UI through API integration.', 'nab-portfolio' ) . '</p>',
+			'desc'   => '<p>' . esc_html__( 'Leading live online interactive sessions that combined core concepts with hands-on live coding and Q&A. Responsible for preparing structured learning materials and exercises for the LMS, evaluating weekly student assignments, and providing continuous technical guidance to help learners build practical web development skills.', 'nab-portfolio' ) . '</p>',
 		),
 		array(
 			'period' => '2023 — present',
