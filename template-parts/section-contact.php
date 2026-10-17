@@ -9,12 +9,12 @@ $nabp_resume  = nabp_mod( 'nabp_resume_url' );
 ?>
 <section id="contact" class="nab-container pt-20 lg:pt-24 pb-12" aria-labelledby="contact-heading">
 	<p class="font-display text-lime text-[20px] tracking-[0.08em] mb-3" data-reveal>// contact</p>
-	<h2 id="contact-heading" class="font-display text-lime text-display-xl leading-[0.88] mb-10" data-reveal>LET'S WORK TOGETHER</h2>
+	<h2 id="contact-heading" data-reveal-lines class="font-display text-lime text-display-xl leading-[0.88] mb-10">LET'S WORK TOGETHER</h2>
 
 	<div class="grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-end" data-reveal>
 		<div>
 			<?php if ( '' !== $nabp_mailto ) : ?>
-				<p class="text-fog/70 text-[18px] mb-4"><?php esc_html_e( 'Ceritakan masalah Anda — saya balas dalam 1 × 24 jam.', 'nab-portfolio' ); ?></p>
+				<p class="text-fog/70 text-[18px] mb-4"><?php esc_html_e( 'Tell me about the problem you are facing — I usually reply within 24 hours.', 'nab-portfolio' ); ?></p>
 				<a href="<?php echo esc_url( $nabp_mailto ); ?>" data-ga="email_cta_click" class="inline-flex items-center gap-3 bg-lime text-ink font-medium rounded-[32px] px-[26px] py-[12px] text-[18px] hover:opacity-90 transition-opacity">
 					<?php echo nabp_icon( 'mail' ); ?>
 					<span class="break-all"><?php echo esc_html( nabp_mod( 'nabp_contact_email' ) ); ?></span>

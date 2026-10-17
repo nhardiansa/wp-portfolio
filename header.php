@@ -8,7 +8,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<script>document.documentElement.classList.add( 'js' );</script>
+	<script>
+		( function () {
+			var root = document.documentElement;
+			if ( window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches ) {
+				root.classList.add( 'motion-failed' );
+				return;
+			}
+			root.classList.add( 'motion-ready' );
+			window.setTimeout( function () {
+				if ( ! window.__nabpMotion ) {
+					root.classList.remove( 'motion-ready' );
+					root.classList.add( 'motion-failed' );
+				}
+			}, 2000 );
+		} )();
+	</script>
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class( 'bg-ink font-body text-fog antialiased overflow-x-hidden' ); ?>>

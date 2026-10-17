@@ -29,21 +29,21 @@ if ( $nabp_query->have_posts() ) {
 		array(
 			'link'    => '',
 			'title'   => __( 'Project 01', 'nab-portfolio' ),
-			'summary' => __( 'Ringkasan masalah satu baris — tambahkan case study nyata via WP Admin.', 'nab-portfolio' ),
+			'summary' => __( 'One-line problem summary — add a real case study via WP Admin.', 'nab-portfolio' ),
 			'cover'   => nabp_case_cover( 0, 0 ),
 			'stack'   => array(),
 		),
 		array(
 			'link'    => '',
 			'title'   => __( 'Project 02', 'nab-portfolio' ),
-			'summary' => __( 'Ringkasan masalah satu baris — tambahkan case study nyata via WP Admin.', 'nab-portfolio' ),
+			'summary' => __( 'One-line problem summary — add a real case study via WP Admin.', 'nab-portfolio' ),
 			'cover'   => nabp_case_cover( 0, 1 ),
 			'stack'   => array(),
 		),
 		array(
 			'link'    => '',
 			'title'   => __( 'Project 03', 'nab-portfolio' ),
-			'summary' => __( 'Ringkasan masalah satu baris — tambahkan case study nyata via WP Admin.', 'nab-portfolio' ),
+			'summary' => __( 'One-line problem summary — add a real case study via WP Admin.', 'nab-portfolio' ),
 			'cover'   => nabp_case_cover( 0, 2 ),
 			'stack'   => array(),
 		),
@@ -52,7 +52,7 @@ if ( $nabp_query->have_posts() ) {
 ?>
 <section id="works" class="nab-container py-20 lg:py-24" aria-labelledby="works-heading">
 	<p class="font-display text-lime text-[20px] tracking-[0.08em] mb-3" data-reveal>// selected works</p>
-	<h2 id="works-heading" class="font-display text-fog text-[56px] sm:text-[64px] lg:text-[96px] leading-[0.95] mb-12" data-reveal>Case Studies</h2>
+	<h2 id="works-heading" data-reveal-lines class="font-display text-fog text-[56px] sm:text-[64px] lg:text-[96px] leading-[0.95] mb-12">Case Studies</h2>
 
 	<div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-20" data-reveal-group>
 		<?php foreach ( $nabp_items as $nabp_item ) : ?>

@@ -27,22 +27,22 @@ if ( $nabp_query->have_posts() ) {
 	$nabp_items = array(
 		array(
 			'title' => __( 'Tech Consultant', 'nab-portfolio' ),
-			'desc'  => __( 'Audit, arsitektur, dan pengambilan keputusan teknis — dari pemilihan stack sampai strategi scaling.', 'nab-portfolio' ),
+			'desc'  => __( 'Audits, architecture, and technical decision-making — from stack selection to scaling strategy.', 'nab-portfolio' ),
 		),
 		array(
 			'title' => __( 'Web & Mobile App Dev', 'nab-portfolio' ),
-			'desc'  => __( 'Membangun aplikasi web & mobile end-to-end: dari alur pengguna, API, sampai deploy produksi.', 'nab-portfolio' ),
+			'desc'  => __( 'End-to-end web and mobile applications: user flows, APIs, and production deployment.', 'nab-portfolio' ),
 		),
 		array(
 			'title' => __( 'Private Mentoring', 'nab-portfolio' ),
-			'desc'  => __( 'Mentoring personal untuk developer yang ingin naik level — code review, roadmap belajar, dan praktik nyata.', 'nab-portfolio' ),
+			'desc'  => __( 'One-on-one mentoring for developers levelling up — code reviews, learning roadmaps, and hands-on practice.', 'nab-portfolio' ),
 		),
 	);
 }
 ?>
 <section id="capabilities" class="nab-container py-20 lg:py-24" aria-labelledby="capabilities-heading">
-	<p class="font-display text-lime text-[20px] tracking-[0.08em] mb-3" data-reveal>// kemampuan inti</p>
-	<h2 id="capabilities-heading" class="font-display text-fog text-[56px] sm:text-[64px] lg:text-[96px] leading-[0.95] mb-12" data-reveal>Kemampuan Inti</h2>
+	<p class="font-display text-lime text-[20px] tracking-[0.08em] mb-3" data-reveal>// capabilities</p>
+	<h2 id="capabilities-heading" data-reveal-lines class="font-display text-fog text-[56px] sm:text-[64px] lg:text-[96px] leading-[0.95] mb-12">WHAT I DO</h2>
 
 	<ol class="border-t border-fog/20" data-reveal-group>
 		<?php foreach ( $nabp_items as $nabp_i => $nabp_item ) : ?>

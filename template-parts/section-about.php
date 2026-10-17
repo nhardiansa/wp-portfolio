@@ -10,33 +10,35 @@ $nabp_steps = array(
 	array(
 		'num'   => '01',
 		'title' => __( 'Understand', 'nab-portfolio' ),
-		'desc'  => __( 'Pahami konteks bisnis & tujuan sebelum menyentuh kode — masalah yang salah difahami berujung solusi salah sasaran.', 'nab-portfolio' ),
+		'desc'  => __( 'Understand the business context and goals before touching code — a misread problem leads to a solution aimed at the wrong target.', 'nab-portfolio' ),
 	),
 	array(
 		'num'   => '02',
 		'title' => __( 'Define', 'nab-portfolio' ),
-		'desc'  => __( 'Rencana solusi & skenario terukur disepakati di awal, termasuk definisi "selesai".', 'nab-portfolio' ),
+		'desc'  => __( 'Agree on the solution plan and measurable scenarios up front, including the definition of "done".', 'nab-portfolio' ),
 	),
 	array(
 		'num'   => '03',
 		'title' => __( 'Build & iterate', 'nab-portfolio' ),
-		'desc'  => __( 'Bangun bertahap dengan feedback rutin — perubahan kecil, sering, dan terkontrol.', 'nab-portfolio' ),
+		'desc'  => __( 'Build incrementally with regular feedback — small, frequent, controlled changes.', 'nab-portfolio' ),
 	),
 	array(
 		'num'   => '04',
 		'title' => __( 'Deliver & measure', 'nab-portfolio' ),
-		'desc'  => __( 'Serah terima plus pengukuran dampak — project selesai saat hasilnya terbukti, bukan saat deploy.', 'nab-portfolio' ),
+		'desc'  => __( 'Hand over and measure impact — a project is complete when the results are proven, not when it ships.', 'nab-portfolio' ),
 	),
 );
 ?>
 <section id="about" class="nab-container py-20 lg:py-24" aria-labelledby="about-heading">
 	<p class="font-display text-lime text-[20px] tracking-[0.08em] mb-3" data-reveal>// about</p>
-	<h2 id="about-heading" class="font-display text-fog text-[56px] sm:text-[64px] lg:text-[96px] leading-[0.95] mb-12" data-reveal>HOW I APPROACH PROBLEMS</h2>
+	<h2 id="about-heading" data-reveal-lines class="font-display text-fog text-[56px] sm:text-[64px] lg:text-[96px] leading-[0.95] mb-12">HOW I APPROACH PROBLEMS</h2>
 
-	<div class="grid gap-12 lg:gap-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)] lg:items-start">
-		<div class="relative" data-reveal>
-			<div class="absolute -inset-3 border-2 border-lime/40 rounded-[28px] -translate-x-4 translate-y-4" aria-hidden="true"></div>
-			<img src="<?php echo esc_url( $nabp_photo ); ?>" alt="<?php esc_attr_e( 'Workspace Nabil Hardiansa', 'nab-portfolio' ); ?>" class="relative w-full aspect-[3/4] object-cover rounded-[24px] grayscale hover:grayscale-0 transition duration-500" loading="lazy" />
+	<div class="grid gap-12 lg:gap-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)] lg:items-stretch">
+		<div class="group relative aspect-[3/4] lg:aspect-auto lg:h-full lg:min-h-[520px]" data-reveal>
+			<div class="absolute -inset-3 border-2 border-lime/40 rounded-[28px] -translate-x-4 translate-y-4 transition-transform duration-500 ease-out group-hover:-translate-x-5 group-hover:translate-y-5" aria-hidden="true"></div>
+			<div class="relative h-full w-full overflow-hidden rounded-[24px]">
+				<img src="<?php echo esc_url( $nabp_photo ); ?>" alt="<?php esc_attr_e( 'Workspace of Nabil Hardiansa', 'nab-portfolio' ); ?>" class="h-full w-full object-cover grayscale transition duration-700 ease-out group-hover:grayscale-0 group-hover:scale-[1.06]" loading="lazy" />
+			</div>
 		</div>
 
 		<div>

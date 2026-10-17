@@ -31,26 +31,26 @@ if ( $nabp_query->have_posts() ) {
 			'period' => '2021 — 2022',
 			'role'   => 'Web Developer',
 			'title'  => 'Widantech',
-			'desc'   => '<p>' . esc_html__( 'Membangun dan memelihara aplikasi web internal berbasis PHP untuk alur operasional klien.', 'nab-portfolio' ) . '</p>',
+			'desc'   => '<p>' . esc_html__( 'Built and maintained PHP-based internal web applications for clients\' operational workflows.', 'nab-portfolio' ) . '</p>',
 		),
 		array(
 			'period' => '2022 — 2023',
 			'role'   => 'Fullstack Web Developer',
 			'title'  => 'Nusacodes',
-			'desc'   => '<p>' . esc_html__( 'Mengembangkan fitur layanan web pada tim produk, dari UI hingga integrasi API.', 'nab-portfolio' ) . '</p>',
+			'desc'   => '<p>' . esc_html__( 'Developed web service features within the product team, from UI through API integration.', 'nab-portfolio' ) . '</p>',
 		),
 		array(
-			'period' => '2023 — sekarang',
+			'period' => '2023 — present',
 			'role'   => 'Fullstack Web Developer',
 			'title'  => 'PT. Chakra Giri Indonesia',
-			'desc'   => '<p>' . esc_html__( 'Mengerjakan project web klien lintas industri sebagai bagian dari tim pengembangan.', 'nab-portfolio' ) . '</p>',
+			'desc'   => '<p>' . esc_html__( 'Delivered client web projects across industries as part of the development team.', 'nab-portfolio' ) . '</p>',
 		),
 	);
 }
 ?>
 <section id="career" class="nab-container py-20 lg:py-24" aria-labelledby="career-heading">
 	<p class="font-display text-lime text-[20px] tracking-[0.08em] mb-3" data-reveal>// experience</p>
-	<h2 id="career-heading" class="font-display text-fog text-[56px] sm:text-[64px] lg:text-[96px] leading-[0.95] mb-12" data-reveal>Experience</h2>
+	<h2 id="career-heading" data-reveal-lines class="font-display text-fog text-[56px] sm:text-[64px] lg:text-[96px] leading-[0.95] mb-12">Experience</h2>
 
 	<ol class="relative border-l-2 border-fog/20 max-w-[820px]" data-reveal-group>
 		<?php foreach ( $nabp_items as $nabp_item ) : ?>

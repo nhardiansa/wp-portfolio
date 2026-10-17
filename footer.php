@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <?php get_template_part( 'template-parts/section', 'contact' ); ?>
 <footer class="nab-container pb-8">
 	<hr class="border-fog/20 mb-8" />
-	<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+	<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3" data-reveal>
 		<p class="text-fog/60 text-[16px]">
 			<?php
 			printf(

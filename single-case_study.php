@@ -73,7 +73,7 @@ while ( have_posts() ) :
 				<p class="mt-6">
 					<a href="<?php echo esc_url( $nabp_url ); ?>" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-lime hover:text-fog transition-colors">
 						<?php echo nabp_icon( 'external' ); ?>
-						<?php esc_html_e( 'Kunjungi project', 'nab-portfolio' ); ?>
+						<?php esc_html_e( 'Visit project', 'nab-portfolio' ); ?>
 					</a>
 				</p>
 			<?php endif; ?>
@@ -84,7 +84,7 @@ while ( have_posts() ) :
 			<?php if ( '' !== $nabp_content ) : ?>
 				<section class="nab-container pb-16 lg:pb-20" aria-labelledby="case-<?php echo esc_attr( ltrim( $nabp_section['key'], '_' ) ); ?>">
 					<p class="font-display text-lime text-[20px] tracking-[0.08em] mb-3" data-reveal><?php echo esc_html( $nabp_section['num'] . ' — ' . strtolower( $nabp_section['label'] ) ); ?></p>
-					<h2 id="case-<?php echo esc_attr( ltrim( $nabp_section['key'], '_' ) ); ?>" class="font-display text-[48px] lg:text-[64px] leading-[0.95] mb-8 <?php echo $nabp_section['lime'] ? 'text-lime' : 'text-fog'; ?>" data-reveal><?php echo esc_html( $nabp_section['label'] ); ?></h2>
+					<h2 id="case-<?php echo esc_attr( ltrim( $nabp_section['key'], '_' ) ); ?>" data-reveal class="font-display text-[48px] lg:text-[64px] leading-[0.95] mb-8 <?php echo $nabp_section['lime'] ? 'text-lime' : 'text-fog'; ?>" data-reveal><?php echo esc_html( $nabp_section['label'] ); ?></h2>
 					<div class="text-fog/85 text-[18px] sm:text-[20px] leading-[1.7] max-w-[720px] [&_p]:mb-6 [&_p:last-child]:mb-0 [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:mb-6 [&_ul:last-child]:mb-0 [&_li]:mb-2 [&_a]:text-lime [&_a:hover]:underline" data-reveal>
 						<?php echo wp_kses_post( $nabp_content ); ?>
 					</div>
@@ -95,11 +95,11 @@ while ( have_posts() ) :
 		<?php if ( '' !== $nabp_mailto ) : ?>
 			<section class="nab-container pb-16 lg:pb-20" data-reveal>
 				<div class="border border-lime/40 rounded-[32px] p-10 lg:p-16 text-center">
-					<h2 class="font-display text-lime text-[36px] sm:text-[48px] leading-[1] mb-4"><?php esc_html_e( 'Punya masalah serupa?', 'nab-portfolio' ); ?></h2>
-					<p class="text-fog/70 text-[18px] mb-8"><?php esc_html_e( 'Mari diskusikan bagaimana pendekatan yang sama bisa bekerja untuk Anda.', 'nab-portfolio' ); ?></p>
+					<h2 class="font-display text-lime text-[36px] sm:text-[48px] leading-[1] mb-4"><?php esc_html_e( 'Have a similar problem?', 'nab-portfolio' ); ?></h2>
+					<p class="text-fog/70 text-[18px] mb-8"><?php esc_html_e( 'Let us discuss how the same approach could work for you.', 'nab-portfolio' ); ?></p>
 					<a href="<?php echo esc_url( $nabp_mailto ); ?>" data-ga="email_cta_click" class="inline-flex items-center gap-3 bg-lime text-ink font-medium rounded-[32px] px-[26px] py-[12px] text-[18px] hover:opacity-90 transition-opacity">
 						<?php echo nabp_icon( 'mail' ); ?>
-						<?php esc_html_e( 'Mari diskusikan via email', 'nab-portfolio' ); ?>
+						<?php esc_html_e( 'Let us talk over email', 'nab-portfolio' ); ?>
 					</a>
 				</div>
 			</section>
@@ -110,13 +110,13 @@ while ( have_posts() ) :
 				<div class="grid gap-6 <?php echo ( $nabp_prev instanceof WP_Post && $nabp_next instanceof WP_Post ) ? 'md:grid-cols-2' : ''; ?>">
 					<?php if ( $nabp_prev instanceof WP_Post ) : ?>
 						<a href="<?php echo esc_url( get_permalink( $nabp_prev ) ); ?>" class="group border border-fog/15 rounded-[24px] p-8 hover:border-lime transition-colors">
-							<p class="font-display text-lime text-[18px] mb-2"><span aria-hidden="true">←</span> <?php esc_html_e( 'Project sebelumnya', 'nab-portfolio' ); ?></p>
+							<p class="font-display text-lime text-[18px] mb-2"><span aria-hidden="true">←</span> <?php esc_html_e( 'Previous project', 'nab-portfolio' ); ?></p>
 							<p class="font-display text-fog text-[24px] leading-[1.1] group-hover:text-lime transition-colors"><?php echo esc_html( get_the_title( $nabp_prev ) ); ?></p>
 						</a>
 					<?php endif; ?>
 					<?php if ( $nabp_next instanceof WP_Post ) : ?>
 						<a href="<?php echo esc_url( get_permalink( $nabp_next ) ); ?>" class="group border border-fog/15 rounded-[24px] p-8 text-right hover:border-lime transition-colors">
-							<p class="font-display text-lime text-[18px] mb-2"><?php esc_html_e( 'Project selanjutnya', 'nab-portfolio' ); ?> <span aria-hidden="true">→</span></p>
+							<p class="font-display text-lime text-[18px] mb-2"><?php esc_html_e( 'Next project', 'nab-portfolio' ); ?> <span aria-hidden="true">→</span></p>
 							<p class="font-display text-fog text-[24px] leading-[1.1] group-hover:text-lime transition-colors"><?php echo esc_html( get_the_title( $nabp_next ) ); ?></p>
 						</a>
 					<?php endif; ?>

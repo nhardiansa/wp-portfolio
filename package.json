@@ -4,9 +4,11 @@
 	"version": "1.0.0",
 	"scripts": {
 		"build": "tailwindcss -i src/input.css -o assets/css/tailwind.css --minify",
-		"watch": "tailwindcss -i src/input.css -o assets/css/tailwind.css --watch"
+		"watch": "tailwindcss -i src/input.css -o assets/css/tailwind.css --watch",
+		"vendor": "node -e \"require('fs').mkdirSync('assets/js/vendor',{recursive:true});require('fs').copyFileSync('node_modules/animejs/dist/bundles/anime.umd.min.js','assets/js/vendor/anime.min.js')\""
 	},
 	"devDependencies": {
-		"@tailwindcss/cli": "^4.1.0"
+		"@tailwindcss/cli": "^4.1.0",
+		"animejs": "^4.5.0"
 	}
 }

@@ -10,6 +10,12 @@ function nabp_setup(): void {
 }
 add_action( 'after_setup_theme', 'nabp_setup' );
 
+function nabp_asset_version( string $relative_path ): string {
+	$file = NABP_DIR . '/' . $relative_path;
+	$time = @filemtime( $file );
+	return false !== $time ? (string) $time : NABP_VERSION;
+}
+
 function nabp_enqueue_assets(): void {
 	wp_enqueue_style(
 		'nabp-fonts',
@@ -22,14 +28,22 @@ function nabp_enqueue_assets(): void {
 		'nabp-tailwind',
 		NABP_URI . '/assets/css/tailwind.css',
 		array( 'nabp-fonts' ),
-		NABP_VERSION
+		nabp_asset_version( 'assets/css/tailwind.css' )
+	);
+
+	wp_enqueue_script(
+		'nabp-anime',
+		NABP_URI . '/assets/js/vendor/anime.min.js',
+		array(),
+		nabp_asset_version( 'assets/js/vendor/anime.min.js' ),
+		true
 	);
 
 	wp_enqueue_script(
 		'nabp-main',
 		NABP_URI . '/assets/js/main.js',
-		array(),
-		NABP_VERSION,
+		array( 'nabp-anime' ),
+		nabp_asset_version( 'assets/js/main.js' ),
 		true
 	);
 }

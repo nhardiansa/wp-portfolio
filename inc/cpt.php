@@ -47,9 +47,9 @@ function nabp_register_post_types(): void {
 		'stack_item',
 		array(
 			'labels'             => array(
-				'name'          => __( 'Kemampuan', 'nab-portfolio' ),
-				'singular_name' => __( 'Kemampuan', 'nab-portfolio' ),
-				'add_new_item'  => __( 'Tambah Kemampuan', 'nab-portfolio' ),
+				'name'          => __( 'Capabilities', 'nab-portfolio' ),
+				'singular_name' => __( 'Capability', 'nab-portfolio' ),
+				'add_new_item'  => __( 'Add New Capability', 'nab-portfolio' ),
 			),
 			'public'             => false,
 			'show_ui'            => true,
@@ -99,19 +99,19 @@ function nabp_case_sections_html( WP_Post $post ): void {
 	$sections = array(
 		'_nabp_cs_problem'  => array(
 			'label' => __( 'Problem', 'nab-portfolio' ),
-			'hint'  => __( 'Masalah apa yang diselesaikan? Jelaskan konteksnya.', 'nab-portfolio' ),
+			'hint'  => __( 'What problem was solved? Explain the context.', 'nab-portfolio' ),
 		),
 		'_nabp_cs_approach' => array(
 			'label' => __( 'Approach', 'nab-portfolio' ),
-			'hint'  => __( 'Bagaimana Anda mendekati & memproses masalahnya?', 'nab-portfolio' ),
+			'hint'  => __( 'How did you approach and work through the problem?', 'nab-portfolio' ),
 		),
 		'_nabp_cs_solution' => array(
 			'label' => __( 'Solution', 'nab-portfolio' ),
-			'hint'  => __( 'Apa yang Anda bangun / kerjakan? Fitur & keputusan kunci.', 'nab-portfolio' ),
+			'hint'  => __( 'What did you build? Key features and decisions.', 'nab-portfolio' ),
 		),
 		'_nabp_cs_result'   => array(
 			'label' => __( 'Result', 'nab-portfolio' ),
-			'hint'  => __( 'Dampak terukur — angka/metrik before → after bila tersedia.', 'nab-portfolio' ),
+			'hint'  => __( 'Measurable impact — numbers/metrics before → after where available.', 'nab-portfolio' ),
 		),
 	);
 
@@ -143,8 +143,8 @@ function nabp_case_details_html( WP_Post $post ): void {
 		'_nabp_cs_role'   => array( 'label' => __( 'Role', 'nab-portfolio' ), 'type' => 'text' ),
 		'_nabp_cs_client' => array( 'label' => __( 'Client / Context', 'nab-portfolio' ), 'type' => 'text' ),
 		'_nabp_cs_period' => array( 'label' => __( 'Period', 'nab-portfolio' ), 'type' => 'text' ),
-		'_nabp_cs_stack'  => array( 'label' => __( 'Tech Stack (pisahkan dengan koma)', 'nab-portfolio' ), 'type' => 'text' ),
-		'_nabp_cs_url'    => array( 'label' => __( 'External URL (opsional)', 'nab-portfolio' ), 'type' => 'url' ),
+		'_nabp_cs_stack'  => array( 'label' => __( 'Tech Stack (comma separated)', 'nab-portfolio' ), 'type' => 'text' ),
+		'_nabp_cs_url'    => array( 'label' => __( 'External URL (optional)', 'nab-portfolio' ), 'type' => 'url' ),
 	);
 
 	foreach ( $fields as $key => $conf ) {
@@ -162,7 +162,7 @@ function nabp_career_box_html( WP_Post $post ): void {
 	wp_nonce_field( 'nabp_save_meta', 'nabp_meta_nonce' );
 
 	$fields = array(
-		'_nabp_career_period' => __( 'Period (mis. 2023 — sekarang)', 'nab-portfolio' ),
+		'_nabp_career_period' => __( 'Period (e.g. 2023 — present)', 'nab-portfolio' ),
 		'_nabp_career_role'   => __( 'Role', 'nab-portfolio' ),
 	);
 
@@ -181,8 +181,8 @@ function nabp_quote_box_html( WP_Post $post ): void {
 	wp_nonce_field( 'nabp_save_meta', 'nabp_meta_nonce' );
 
 	$fields = array(
-		'_nabp_cq_name' => __( 'Nama klien', 'nab-portfolio' ),
-		'_nabp_cq_role' => __( 'Role / perusahaan klien', 'nab-portfolio' ),
+		'_nabp_cq_name' => __( 'Client name', 'nab-portfolio' ),
+		'_nabp_cq_role' => __( 'Client role / company', 'nab-portfolio' ),
 	);
 
 	foreach ( $fields as $key => $label ) {
@@ -247,6 +247,44 @@ function nabp_save_meta( int $post_id ): void {
 }
 add_action( 'save_post', 'nabp_save_meta' );
 
+function nabp_seed_mock_data(): array {
+	return array(
+		'B2B Manufacturing Company Profile Redesign' => array(
+			'_nabp_cs_role'     => 'Web Developer (freelance)',
+			'_nabp_cs_client'   => 'B2B manufacturing company',
+			'_nabp_cs_period'   => '2024',
+			'_nabp_cs_stack'    => 'WordPress, PHP, Tailwind CSS',
+			'_nabp_cs_url'      => '',
+			'_nabp_cs_problem'  => '<p>The old website was stacked with page builders: Lighthouse Performance score 34, 6.2s load time, and broken layouts on mobile — even though 70% of traffic came from phones. B2B prospects left before reading a single paragraph.</p>',
+			'_nabp_cs_approach' => '<p>A performance audit showed the bottleneck was markup and assets, not the server, so the solution was deliberately conservative to keep the existing hosting: content re-mapped, design rebuilt mobile-first, and all styling replaced with a custom theme without page builders.</p>',
+			'_nabp_cs_solution' => '<p>A lightweight custom WordPress theme: semantic HTML, minified and committed CSS, responsive images, standard hosting caching, and a content structure non-technical staff can manage through WP Admin.</p>',
+			'_nabp_cs_result'   => '<p>The new site loads 5x faster and website inquiries tripled within the first two months.</p><ul><li>Lighthouse Performance: 34 → 96</li><li>Load time: 6.2s → 1.1s</li><li>Website inquiries: 3x in 2 months</li></ul>',
+		),
+		'Centralized Inventory Dashboard for a 3-Branch Retailer' => array(
+			'_nabp_cs_role'     => 'Fullstack Developer',
+			'_nabp_cs_client'   => 'Local retail, 3 branches',
+			'_nabp_cs_period'   => '2024–2025',
+			'_nabp_cs_stack'    => 'React, Node.js, PostgreSQL',
+			'_nabp_cs_url'      => '',
+			'_nabp_cs_problem'  => '<p>Stock was recorded in separate Excel files per branch and collected weekly. Monthly stock discrepancy averaged 12%, procurement was coordinated over WhatsApp, and nobody knew per-product margins until month end.</p>',
+			'_nabp_cs_approach' => '<p>One week of on-site observation before writing code: noting when bad data entered, who needed which report, and the physical flow of goods. A centralized stock data model was designed first, and the dashboard was rolled out branch by branch so the team was not forced to switch tools all at once.</p>',
+			'_nabp_cs_solution' => '<p>A real-time cross-branch stock dashboard with daily transaction sync, automatic reorder alerts when stock hits the threshold, and downloadable per-product margin reports.</p>',
+			'_nabp_cs_result'   => '<p>Stock discrepancy dropped from 12% to under 2%, and stocktaking that used to take two days now finishes in three hours.</p><ul><li>Stock discrepancy: 12% → &lt; 2%</li><li>Stocktaking time: 2 days → 3 hours</li><li>Late reorders: nearly 0 incidents</li></ul>',
+		),
+		'Online Booking System for a Local Photo Studio' => array(
+			'_nabp_cs_role'     => 'Fullstack Developer (freelance)',
+			'_nabp_cs_client'   => 'Small photo studio, Makassar',
+			'_nabp_cs_period'   => '2025',
+			'_nabp_cs_stack'    => 'Laravel, MySQL, Tailwind CSS, Alpine.js',
+			'_nabp_cs_url'      => '',
+			'_nabp_cs_problem'  => '<p>Bookings were handled through Instagram DMs: schedules often collided because there was no single source of truth, deposits were recorded manually, and client requests sank among other chats — with a 4-hour average reply time.</p>',
+			'_nabp_cs_approach' => '<p>I started from the flow, not the technology: mapping the booking steps from both the studio owner\'s and the client\'s side, then designing a three-step flow — pick a package, grab a calendar slot, pay the deposit. The MVP was built in 4 sprints with weekly feedback so UI decisions followed real habits, not assumptions.</p>',
+			'_nabp_cs_solution' => '<p>An online booking app with a real-time slot calendar, automatic deposit payment links, a compact dashboard for the studio owner, and automatic notifications to both parties. Business rules — session duration, double-booking, deposits — are centralized in one module so they can change without touching other flows.</p>',
+			'_nabp_cs_result'   => '<p>Booking response time dropped sharply and schedule collisions stopped entirely in the first three months.</p><ul><li>Booking response time: ~4 hours → &lt; 5 minutes</li><li>Schedule collisions: 0 in the first 3 months</li><li>40% of bookings arrive outside business hours — with no operator</li></ul>',
+		),
+	);
+}
+
 function nabp_seed_mock_case_studies(): void {
 	if ( get_option( 'nabp_seeded' ) ) {
 		return;
@@ -257,64 +295,77 @@ function nabp_seed_mock_case_studies(): void {
 		return;
 	}
 
-	$mockups = array(
-		array(
-			'post_title' => 'Redesign Website Company Profile Manufaktur B2B',
-			'meta_input' => array(
-				'_nabp_cs_role'     => 'Web Developer (freelance)',
-				'_nabp_cs_client'   => 'Perusahaan manufaktur B2B',
-				'_nabp_cs_period'   => '2024',
-				'_nabp_cs_stack'    => 'WordPress, PHP, Tailwind CSS',
-				'_nabp_cs_url'      => '',
-				'_nabp_cs_problem'  => '<p>Website lama dibangun bertumpuk page builder: skor Lighthouse Performance 34, waktu load 6,2 detik, dan tata letak rusak di ponsel — padahal 70% trafik datang dari mobile. Calon klien B2B pergi sebelum membaca satu paragraf pun.</p>',
-				'_nabp_cs_approach' => '<p>Audit performa menunjukkan beban utama ada di markup dan aset, bukan di server, sehingga solusi dipilih konservatif agar hosting tetap sama: konten dipetakan ulang, desain dibangun ulang mobile-first, dan seluruh styling diganti tema kustom tanpa page builder.</p>',
-				'_nabp_cs_solution' => '<p>Tema WordPress kustom ringan: HTML semantik, CSS terkompresi dan di-commit, gambar responsif, caching standar hosting, serta struktur konten yang bisa dikelola staf non-teknis lewat WP Admin.</p>',
-				'_nabp_cs_result'   => '<p>Situs baru memuat 5x lebih cepat dan inquiry via website naik 3x dalam 2 bulan pertama.</p><ul><li>Lighthouse Performance: 34 → 96</li><li>Waktu load: 6,2 detik → 1,1 detik</li><li>Inquiry via website naik 3x dalam 2 bulan</li></ul>',
-			),
-		),
-		array(
-			'post_title' => 'Dashboard Inventory Terpusat untuk Retail 3 Cabang',
-			'meta_input' => array(
-				'_nabp_cs_role'     => 'Fullstack Developer',
-				'_nabp_cs_client'   => 'Retail lokal, 3 cabang',
-				'_nabp_cs_period'   => '2024–2025',
-				'_nabp_cs_stack'    => 'React, Node.js, PostgreSQL',
-				'_nabp_cs_url'      => '',
-				'_nabp_cs_problem'  => '<p>Stok dicatat di file Excel terpisah per cabang dan dikumpulkan mingguan. Selisih stok bulanan rata-rata 12%, pengadaan diatur lewat pesan WhatsApp, dan tidak ada yang tahu margin per produk sampai akhir bulan.</p>',
-				'_nabp_cs_approach' => '<p>Satu minggu observasi kerja lapangan sebelum menulis kode: mencatat kapan data salah masuk, siapa butuh laporan apa, dan alur fisik barang. Data model stok terpusat dirancang dulu, dashboard dibangun bertahap per cabang agar tim tidak dipaksa berpindah alat sekaligus.</p>',
-				'_nabp_cs_solution' => '<p>Dashboard stok real-time lintas cabang dengan sinkronisasi transaksi harian, alert reorder otomatis saat stok menyentuh ambang, dan laporan margin per produk yang bisa diunduh kapan saja.</p>',
-				'_nabp_cs_result'   => '<p>Selisih stok turun dari 12% ke bawah 2% dan opname yang tadinya dua hari selesai dalam tiga jam.</p><ul><li>Selisih stok: 12% → &lt; 2%</li><li>Waktu opname: 2 hari → 3 jam</li><li>Reorder terlambat: hampir 0 kejadian</li></ul>',
-			),
-		),
-		array(
-			'post_title' => 'Sistem Booking Online untuk Studio Foto Lokal',
-			'meta_input' => array(
-				'_nabp_cs_role'     => 'Fullstack Developer (freelance)',
-				'_nabp_cs_client'   => 'Studio foto UMKM, Makassar',
-				'_nabp_cs_period'   => '2025',
-				'_nabp_cs_stack'    => 'Laravel, MySQL, Tailwind CSS, Alpine.js',
-				'_nabp_cs_url'      => '',
-				'_nabp_cs_problem'  => '<p>Booking dilayani lewat DM Instagram: jadwal sering bentrok karena tidak ada satu sumber kebenaran, pembayaran DP dicatat manual, dan permintaan klien tenggelam di antara chat lain — rata-rata baru dibalas 4 jam kemudian.</p>',
-				'_nabp_cs_approach' => '<p>Saya mulai dari alur, bukan teknologi: memetakan langkah booking dari sisi pemilik studio dan klien, lalu merancang alur tiga langkah — pilih paket, ambil slot kalender, bayar DP. MVP dibangun dalam 4 sprint dengan feedback mingguan agar keputusan UI mengikuti kebiasaan nyata, bukan asumsi.</p>',
-				'_nabp_cs_solution' => '<p>Aplikasi booking online dengan kalender slot real-time, link pembayaran DP otomatis, dashboard ringkas untuk pemilik studio, dan notifikasi otomatis ke kedua pihak. Aturan bisnis — durasi sesi, slot ganda, deposit — dipusatkan di satu modul agar mudah diubah tanpa menyentuh alur lain.</p>',
-				'_nabp_cs_result'   => '<p>Waktu balas booking turun drastis dan tidak ada lagi jadwal bentrok dalam tiga bulan pertama.</p><ul><li>Waktu balas booking: ±4 jam → &lt; 5 menit</li><li>Jadwal bentrok: 0 dalam 3 bulan pertama</li><li>40% booking masuk di luar jam kerja — tanpa operator</li></ul>',
-			),
-		),
-	);
-
-	foreach ( $mockups as $mockup ) {
+	foreach ( nabp_seed_mock_data() as $title => $meta ) {
 		wp_insert_post(
 			array(
 				'post_type'   => 'case_study',
 				'post_status' => 'publish',
-				'post_title'  => $mockup['post_title'],
-				'meta_input'  => $mockup['meta_input'],
+				'post_title'  => $title,
+				'meta_input'  => $meta,
 			)
 		);
 	}
 
 	update_option( 'nabp_seeded', 1 );
+	update_option( 'nabp_seed_version', 2 );
 }
+
+function nabp_seed_legacy_titles(): array {
+	return array(
+		'B2B Manufacturing Company Profile Redesign'                     => 'Redesign Website Company Profile Manufaktur B2B',
+		'Centralized Inventory Dashboard for a 3-Branch Retailer'         => 'Dashboard Inventory Terpusat untuk Retail 3 Cabang',
+		'Online Booking System for a Local Photo Studio'                  => 'Sistem Booking Online untuk Studio Foto Lokal',
+	);
+}
+
+function nabp_upgrade_seed_content(): void {
+	if ( 2 <= (int) get_option( 'nabp_seed_version', 1 ) ) {
+		return;
+	}
+
+	$seed    = nabp_seed_mock_data();
+	$legacy  = nabp_seed_legacy_titles();
+	$targets = array_merge( array_keys( $seed ), array_values( $legacy ) );
+
+	$posts = get_posts(
+		array(
+			'post_type'      => 'case_study',
+			'post_status'    => 'any',
+			'posts_per_page' => -1,
+			'fields'         => 'ids',
+			'no_found_rows'  => true,
+		)
+	);
+
+	foreach ( $posts as $post_id ) {
+		$title = get_the_title( $post_id );
+		if ( ! in_array( $title, $targets, true ) ) {
+			continue;
+		}
+
+		$new_title = $title;
+		foreach ( $legacy as $english => $old ) {
+			if ( $old === $title ) {
+				$new_title = $english;
+				break;
+			}
+		}
+
+		wp_update_post(
+			array(
+				'ID'         => $post_id,
+				'post_title' => $new_title,
+			)
+		);
+
+		foreach ( $seed[ $new_title ] as $key => $value ) {
+			update_post_meta( $post_id, $key, $value );
+		}
+	}
+
+	update_option( 'nabp_seed_version', 2 );
+}
+add_action( 'init', 'nabp_upgrade_seed_content', 20 );
 
 function nabp_after_switch_theme(): void {
 	nabp_register_post_types();

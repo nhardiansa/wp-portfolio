@@ -42,12 +42,13 @@ $nabp_last_index = count( $nabp_name_lines ) - 1;
 					<?php esc_html_e( 'See case studies', 'nab-portfolio' ); ?>
 					<span class="inline-block transition-transform group-hover:translate-x-1"><?php echo nabp_icon( 'arrow-right' ); ?></span>
 				</a>
-			</div>
-		</div>
+			</div>		</div>
 
-		<div class="hero-photo relative" style="--d: 400ms">
-			<div class="absolute -inset-3 border-2 border-lime/40 rounded-[28px] translate-x-4 translate-y-4" aria-hidden="true"></div>
-			<img src="<?php echo esc_url( $nabp_photo ); ?>" alt="<?php esc_attr_e( 'Foto Nabil Hardiansa', 'nab-portfolio' ); ?>" class="relative w-full aspect-[4/5] object-cover rounded-[24px] grayscale hover:grayscale-0 transition duration-500" />
+		<div class="hero-photo group relative" style="--d: 400ms">
+			<div class="absolute -inset-3 border-2 border-lime/40 rounded-[28px] translate-x-4 translate-y-4 transition-transform duration-500 ease-out group-hover:translate-x-5 group-hover:translate-y-5" aria-hidden="true"></div>
+			<div class="relative overflow-hidden rounded-[24px]">
+				<img src="<?php echo esc_url( $nabp_photo ); ?>" alt="<?php esc_attr_e( 'Nabil Hardiansa portrait', 'nab-portfolio' ); ?>" class="w-full aspect-[4/5] object-cover grayscale transition duration-700 ease-out group-hover:grayscale-0 group-hover:scale-[1.06]" />
+			</div>
 			<div class="absolute bottom-4 left-4 flex items-center gap-2 bg-ink/85 backdrop-blur border border-lime/40 rounded-full px-4 py-2">
 				<span class="hero-dot w-2 h-2 rounded-full bg-lime" aria-hidden="true"></span>
 				<span class="text-fog text-[14px]"><?php esc_html_e( 'Available for freelance', 'nab-portfolio' ); ?></span>

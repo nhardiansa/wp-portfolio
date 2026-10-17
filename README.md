@@ -14,8 +14,13 @@ Custom WordPress theme — website pribadi & portfolio: one-pager plus halaman c
 	npm install
 	npm run build     # minify → assets/css/tailwind.css
 	npm run watch
+	npm run vendor    # salin anime.js UMD dari node_modules → assets/js/vendor/
 
 Deploy produksi = upload folder tema + aktivasi — tidak butuh Node di server.
+
+## Animasi
+
+Motion memakai **anime.js v4** (di-vendor di `assets/js/vendor/anime.min.js`, di-commit) + IntersectionObserver. State gating ada di `<html class="motion-ready">` (diset pre-paint) dengan fallback `motion-failed` bila JS gagal load atau `prefers-reduced-motion` aktif.
 
 ## Pengelolaan konten (WP Admin)
 

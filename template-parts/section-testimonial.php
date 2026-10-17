@@ -17,7 +17,7 @@ if ( ! $nabp_query->have_posts() ) {
 ?>
 <section id="testimonial" class="nab-container py-20 lg:py-24" aria-labelledby="testimonial-heading">
 	<p class="font-display text-lime text-[20px] tracking-[0.08em] mb-3" data-reveal>// testimonial</p>
-	<h2 id="testimonial-heading" class="font-display text-fog text-[56px] sm:text-[64px] lg:text-[96px] leading-[0.95] mb-12" data-reveal>What Clients Say</h2>
+	<h2 id="testimonial-heading" data-reveal-lines class="font-display text-fog text-[56px] sm:text-[64px] lg:text-[96px] leading-[0.95] mb-12">What Clients Say</h2>
 
 	<div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3" data-reveal-group>
 		<?php while ( $nabp_query->have_posts() ) : $nabp_query->the_post(); ?>
