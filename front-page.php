@@ -1,8 +1,12 @@
 <?php
 get_header();
-?>
-<section class="nab-container py-24">
-	<h1 class="font-display text-fog text-display-xl leading-[0.93]"><?php bloginfo( 'name' ); ?></h1>
-</section>
-<?php
+
+get_template_part( 'template-parts/section', 'hero' );
+get_template_part( 'template-parts/section', 'about' );
+get_template_part( 'template-parts/section', 'how-i-work' );
+get_template_part( 'template-parts/section', 'works' );
+get_template_part( 'template-parts/section', 'career' );
+get_template_part( 'template-parts/section', 'stack' );
+get_template_part( 'template-parts/section', 'testimonial' );
+
 get_footer();

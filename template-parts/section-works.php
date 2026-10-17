@@ -1,0 +1,96 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+$nabp_items = array();
+$nabp_query = new WP_Query(
+	array(
+		'post_type'      => 'case_study',
+		'posts_per_page' => 6,
+		'no_found_rows'  => true,
+	)
+);
+
+if ( $nabp_query->have_posts() ) {
+	while ( $nabp_query->have_posts() ) {
+		$nabp_query->the_post();
+		$nabp_items[] = array(
+			'link'    => get_permalink(),
+			'title'   => get_the_title(),
+			'summary' => nabp_case_summary( get_the_ID() ),
+			'cover'   => nabp_case_cover( get_the_ID(), count( $nabp_items ) ),
+			'stack'   => nabp_case_stack_items( get_the_ID() ),
+		);
+	}
+	wp_reset_postdata();
+} else {
+	$nabp_items = array(
+		array(
+			'link'    => '',
+			'title'   => __( 'Project 01', 'nab-portfolio' ),
+			'summary' => __( 'Ringkasan masalah satu baris — tambahkan case study nyata via WP Admin.', 'nab-portfolio' ),
+			'cover'   => nabp_case_cover( 0, 0 ),
+			'stack'   => array(),
+		),
+		array(
+			'link'    => '',
+			'title'   => __( 'Project 02', 'nab-portfolio' ),
+			'summary' => __( 'Ringkasan masalah satu baris — tambahkan case study nyata via WP Admin.', 'nab-portfolio' ),
+			'cover'   => nabp_case_cover( 0, 1 ),
+			'stack'   => array(),
+		),
+		array(
+			'link'    => '',
+			'title'   => __( 'Project 03', 'nab-portfolio' ),
+			'summary' => __( 'Ringkasan masalah satu baris — tambahkan case study nyata via WP Admin.', 'nab-portfolio' ),
+			'cover'   => nabp_case_cover( 0, 2 ),
+			'stack'   => array(),
+		),
+	);
+}
+
+$nabp_mailto = nabp_mailto_url();
+?>
+<section id="works" class="nab-container py-20 lg:py-24" aria-labelledby="works-heading">
+	<p class="font-display text-lime text-[20px] tracking-[0.08em] mb-3" data-reveal>// selected works</p>
+	<h2 id="works-heading" class="font-display text-fog text-[56px] sm:text-[64px] lg:text-[96px] leading-[0.95] mb-12" data-reveal>Case Studies</h2>
+
+	<div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-20" data-reveal-group>
+		<?php foreach ( $nabp_items as $nabp_item ) : ?>
+			<?php
+			$nabp_card_open = '' !== $nabp_item['link']
+				? '<a href="' . esc_url( $nabp_item['link'] ) . '" class="group block">'
+				: '<div class="group block">';
+			$nabp_card_close = '' !== $nabp_item['link'] ? '</a>' : '</div>';
+			?>
+			<?php echo $nabp_card_open; // phpcs:ignore WordPress.Security.EscapeOutput ?>
+				<div class="aspect-[4/3] rounded-[24px] overflow-hidden border border-fog/15 group-hover:border-lime transition-colors mb-5">
+					<img src="<?php echo esc_url( $nabp_item['cover'] ); ?>" alt="<?php echo esc_attr( $nabp_item['title'] ); ?>" class="w-full h-full object-cover group-hover:opacity-90 transition-opacity" loading="lazy" />
+				</div>
+				<h3 class="font-display text-fog text-[26px] lg:text-[28px] leading-[1.1] group-hover:text-lime transition-colors mb-2"><?php echo esc_html( $nabp_item['title'] ); ?></h3>
+				<?php if ( '' !== $nabp_item['summary'] ) : ?>
+					<p class="text-fog/70 text-[16px] leading-[1.55] mb-4 line-clamp-2"><?php echo esc_html( $nabp_item['summary'] ); ?></p>
+				<?php endif; ?>
+				<?php if ( ! empty( $nabp_item['stack'] ) ) : ?>
+					<ul class="flex flex-wrap gap-2">
+						<?php foreach ( $nabp_item['stack'] as $nabp_chip ) : ?>
+							<li class="border border-fog/25 rounded-full px-3 py-1 text-[13px] text-fog/70"><?php echo esc_html( $nabp_chip ); ?></li>
+						<?php endforeach; ?>
+					</ul>
+				<?php endif; ?>
+			<?php echo $nabp_card_close; // phpcs:ignore WordPress.Security.EscapeOutput ?>
+		<?php endforeach; ?>
+	</div>
+
+	<?php if ( '' !== $nabp_mailto ) : ?>
+		<div class="border border-fog/15 rounded-[32px] p-10 lg:p-16 text-center" data-reveal>
+			<p class="font-display text-lime text-[20px] tracking-[0.08em] mb-4">// next step</p>
+			<h3 class="font-display text-fog text-[36px] sm:text-[48px] lg:text-[64px] leading-[1] mb-8"><?php esc_html_e( 'Punya masalah yang perlu diselesaikan?', 'nab-portfolio' ); ?></h3>
+			<a href="<?php echo esc_url( $nabp_mailto ); ?>" data-ga="email_cta_click" class="inline-flex items-center gap-3 bg-lime text-ink font-medium rounded-[32px] px-[26px] py-[12px] text-[18px] hover:opacity-90 transition-opacity">
+				<?php echo nabp_icon( 'mail' ); ?>
+				<?php esc_html_e( 'Mari diskusikan via email', 'nab-portfolio' ); ?>
+			</a>
+		</div>
+	<?php endif; ?>
+</section>
