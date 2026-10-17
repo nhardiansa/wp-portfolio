@@ -19,7 +19,7 @@
 	--font-body: "Roboto", sans-serif;
 }
 
-@utility text-display-hero { font-size: clamp( 64px, 9vw, 155.89px ); }
+@utility text-display-hero { font-size: clamp( 64px, 7.5vw, 155.89px ); }
 @utility text-display-xl { font-size: clamp( 68px, 11.5vw, 165px ); }
 @utility text-display-skill { font-size: clamp( 52px, 8.9vw, 128px ); }
 @utility text-display-tag { font-size: clamp( 40px, 6.7vw, 96.14px ); }
