@@ -81,9 +81,9 @@
 	}
 
 	const setupNavOverlay = () => {
-		const toggle = document.querySelector( '[data-nav-toggle]' );
+		const toggles = Array.from( document.querySelectorAll( '[data-nav-toggle]' ) );
 		const wrapper = document.getElementById( 'nav-overlay' );
-		if ( ! toggle || ! wrapper || ! gsapApi ) {
+		if ( ! toggles.length || ! wrapper ) {
 			return;
 		}
 
@@ -92,44 +92,73 @@
 		const panels = wrapper.querySelectorAll( '.backdrop-layer' );
 		const links = wrapper.querySelectorAll( '.nav-link' );
 		const fadeTargets = wrapper.querySelectorAll( '[data-menu-fade]' );
-		const bars = toggle.querySelectorAll( '.nav-hamburger-bar' );
+		const bars = toggles.flatMap( ( t ) => Array.from( t.querySelectorAll( '.nav-hamburger-bar' ) ) );
+		const tops = bars.filter( ( _, i ) => 0 === i % 3 );
+		const middles = bars.filter( ( _, i ) => 1 === i % 3 );
+		const bottoms = bars.filter( ( _, i ) => 2 === i % 3 );
 		let isOpen = false;
 		let tl = null;
+
+		const setState = ( open ) => {
+			wrapper.setAttribute( 'data-nav', open ? 'open' : 'closed' );
+			wrapper.setAttribute( 'aria-hidden', String( ! open ) );
+			toggles.forEach( ( t ) => t.setAttribute( 'aria-expanded', String( open ) ) );
+			document.body.style.overflow = open ? 'hidden' : '';
+		};
+
+		const openInstant = () => {
+			wrapper.style.display = 'block';
+			setState( true );
+		};
+
+		const closeInstant = () => {
+			wrapper.style.display = 'none';
+			setState( false );
+		};
+
+		if ( ! gsapApi || prefersReducedMotion ) {
+			toggles.forEach( ( t ) => t.addEventListener( 'click', () => ( isOpen ? closeInstant() : openInstant() ) ) );
+			if ( overlay ) {
+				overlay.addEventListener( 'click', closeInstant );
+			}
+			window.addEventListener( 'keydown', ( e ) => {
+				if ( 'Escape' === e.key && isOpen ) {
+					closeInstant();
+				}
+			} );
+			return;
+		}
 
 		const build = () => {
 			tl = gsapApi.timeline( { paused: true, onReverseComplete: () => {
 				wrapper.style.display = 'none';
-				wrapper.setAttribute( 'data-nav', 'closed' );
-				wrapper.setAttribute( 'aria-hidden', 'true' );
+				setState( false );
 			} } );
 			tl.set( wrapper, { display: 'block' } )
 				.fromTo( overlay, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.35 }, 0 )
 				.fromTo( panels, { xPercent: 101 }, { xPercent: 0, duration: 0.575, stagger: 0.12, ease: 'nav-ease' }, 0 )
 				.fromTo( links, { yPercent: 140, rotate: 10 }, { yPercent: 0, rotate: 0, duration: 0.7, stagger: 0.05, ease: 'nav-ease' }, 0.35 )
 				.fromTo( fadeTargets, { autoAlpha: 0, yPercent: 50 }, { autoAlpha: 1, yPercent: 0, duration: 0.5, stagger: 0.04, clearProps: 'all' }, 0.55 )
-				.to( bars[ 0 ], { rotate: 45, y: 10, duration: 0.4, ease: 'power2.out' }, 0 )
-				.to( bars[ 1 ], { opacity: 0, duration: 0.3 }, 0 )
-				.to( bars[ 2 ], { rotate: -45, y: -10, duration: 0.4, ease: 'power2.out' }, 0 );
+				.to( tops, { rotate: 45, y: 10, duration: 0.4, ease: 'power2.out' }, 0 )
+				.to( middles, { opacity: 0, duration: 0.3 }, 0 )
+				.to( bottoms, { rotate: -45, y: -10, duration: 0.4, ease: 'power2.out' }, 0 );
 		};
 
 		const openMenu = () => {
 			isOpen = true;
-			wrapper.setAttribute( 'data-nav', 'open' );
-			wrapper.setAttribute( 'aria-hidden', 'false' );
-			toggle.setAttribute( 'aria-expanded', 'true' );
-			document.body.style.overflow = 'hidden';
+			setState( true );
 			tl.timeScale( 1 ).play();
 		};
 
 		const closeMenu = () => {
 			isOpen = false;
-			toggle.setAttribute( 'aria-expanded', 'false' );
+			toggles.forEach( ( t ) => t.setAttribute( 'aria-expanded', 'false' ) );
 			document.body.style.overflow = '';
 			tl.timeScale( 1.6 ).reverse();
 		};
 
 		build();
-		toggle.addEventListener( 'click', () => ( isOpen ? closeMenu() : openMenu() ) );
+		toggles.forEach( ( t ) => t.addEventListener( 'click', () => ( isOpen ? closeMenu() : openMenu() ) ) );
 		overlay.addEventListener( 'click', closeMenu );
 		wrapper.querySelectorAll( '.menu-list-item a' ).forEach( ( link ) => {
 			link.addEventListener( 'click', closeMenu );
@@ -174,6 +203,13 @@
 	};
 
 	setupNavOverlay();
+
+	const siteHeader = document.querySelector( '.site-header' );
+	if ( siteHeader ) {
+		const onHeaderScroll = () => siteHeader.classList.toggle( 'is-scrolled', window.scrollY > 24 );
+		onHeaderScroll();
+		window.addEventListener( 'scroll', onHeaderScroll, { passive: true } );
+	}
 
 	const splitHeading = ( el ) => {
 		if ( ! motion ) {
