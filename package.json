@@ -1,0 +1,12 @@
+{
+	"name": "nab-portfolio-theme",
+	"private": true,
+	"version": "1.0.0",
+	"scripts": {
+		"build": "tailwindcss -i src/input.css -o assets/css/tailwind.css --minify",
+		"watch": "tailwindcss -i src/input.css -o assets/css/tailwind.css --watch"
+	},
+	"devDependencies": {
+		"@tailwindcss/cli": "^4.1.0"
+	}
+}
