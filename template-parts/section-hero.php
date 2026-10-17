@@ -14,7 +14,7 @@ if ( empty( $nabp_name_lines ) ) {
 $nabp_last_index = count( $nabp_name_lines ) - 1;
 ?>
 <section id="hero" class="nab-container pt-12 pb-20 lg:pt-20 lg:pb-24" aria-labelledby="hero-name">
-	<div class="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.35fr)] lg:gap-x-16 lg:gap-y-6">
+	<div class="grid gap-3 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.35fr)] lg:gap-x-16 lg:gap-y-6">
 		<div class="lg:col-start-2 lg:row-start-1">
 			<p class="hero-fade flex items-center gap-3 mb-6 lg:mb-8" style="--d: 60ms">
 				<span class="w-2 h-2 rounded-full bg-lime" aria-hidden="true"></span>
