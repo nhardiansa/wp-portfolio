@@ -28,22 +28,22 @@ if ( $nabp_query->have_posts() ) {
 } else {
 	$nabp_items = array(
 		array(
-			'period' => '2021 — 2022',
+			'period' => '2025 — present',
 			'role'   => 'Business Development',
 			'title'  => 'Widantech',
 			'desc'   => '<p>' . esc_html__( 'Managed end-to-end Odoo implementation for FnB Business from requirement analysis to partnership documentation, supported internal training for new academic system features for University client, and led trainer prospecting and scheduling for Nusacodes.', 'nab-portfolio' ) . '</p>',
 		),
 		array(
-			'period' => '2022 — 2023',
+			'period' => '2026 — present',
 			'role'   => 'React Mentor',
 			'title'  => 'Nusacodes',
 			'desc'   => '<p>' . esc_html__( 'Leading live online interactive sessions that combined core concepts with hands-on live coding and Q&A. Responsible for preparing structured learning materials and exercises for the LMS, evaluating weekly student assignments, and providing continuous technical guidance to help learners build practical web development skills.', 'nab-portfolio' ) . '</p>',
 		),
 		array(
-			'period' => '2023 — present',
+			'period' => '2022 — 2024',
 			'role'   => 'Fullstack Web Developer',
 			'title'  => 'PT. Chakra Giri Indonesia',
-			'desc'   => '<p>' . esc_html__( 'Delivered client web projects across industries as part of the development team.', 'nab-portfolio' ) . '</p>',
+			'desc'   => '<p>' . esc_html__( 'Experienced Web Developer skilled in building high-performance landing pages, modern content-driven web portals, e-learning platforms, and web-based management dashboards. Proficient in Next.js and Laravel, with a strong focus on modernizing user interfaces, optimizing site performance, and delivering functional web applications across various industries.', 'nab-portfolio' ) . '</p>',
 		),
 	);
 }
