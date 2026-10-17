@@ -34,3 +34,24 @@ function nabp_enqueue_assets(): void {
 	);
 }
 add_action( 'wp_enqueue_scripts', 'nabp_enqueue_assets' );
+
+function nabp_enqueue_analytics(): void {
+	$ga4 = trim( nabp_mod( 'nabp_ga4_id' ) );
+	if ( '' === $ga4 ) {
+		return;
+	}
+
+	wp_enqueue_script(
+		'nabp-gtag',
+		'https://www.googletagmanager.com/gtag/js?id=' . rawurlencode( $ga4 ),
+		array(),
+		null,
+		false
+	);
+
+	wp_add_inline_script(
+		'nabp-gtag',
+		"window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','" . esc_js( $ga4 ) . "');"
+	);
+}
+add_action( 'wp_enqueue_scripts', 'nabp_enqueue_analytics', 20 );
