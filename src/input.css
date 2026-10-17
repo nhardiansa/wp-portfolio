@@ -39,8 +39,55 @@ html {
 	scroll-behavior: smooth;
 }
 
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+	outline: 2px solid var( --color-lime );
+	outline-offset: 3px;
+}
+
+.nav-link.is-active {
+	color: var( --color-lime );
+	border-color: var( --color-lime );
+	opacity: 1;
+}
+
+.js [data-reveal],
+.js [data-reveal-group] > * {
+	opacity: 0;
+	transform: translateY( 24px );
+	transition:
+		opacity 0.28s ease,
+		transform 0.28s ease;
+}
+
+.js [data-reveal].is-revealed,
+.js [data-reveal-group].is-revealed > * {
+	opacity: 1;
+	transform: none;
+}
+
+.js [data-reveal-group].is-revealed > *:nth-child( 2 ) { transition-delay: 90ms; }
+.js [data-reveal-group].is-revealed > *:nth-child( 3 ) { transition-delay: 180ms; }
+.js [data-reveal-group].is-revealed > *:nth-child( 4 ) { transition-delay: 270ms; }
+.js [data-reveal-group].is-revealed > *:nth-child( 5 ) { transition-delay: 360ms; }
+.js [data-reveal-group].is-revealed > *:nth-child( 6 ) { transition-delay: 450ms; }
+
 @media (prefers-reduced-motion: reduce) {
 	html {
 		scroll-behavior: auto;
+	}
+
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		transition-delay: 0ms !important;
+		scroll-behavior: auto !important;
 	}
 }

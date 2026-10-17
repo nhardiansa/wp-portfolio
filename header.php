@@ -18,8 +18,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="flex items-center justify-center w-10 h-12 rounded-[8px] bg-lime font-display text-ink text-2xl" aria-label="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>">N</a>
 	<nav aria-label="<?php esc_attr_e( 'Primary', 'nab-portfolio' ); ?>">
 		<ul class="flex items-center gap-3 sm:gap-4">
-			<li><a href="#works" data-nav-link class="nav-link inline-block border border-[#ffffff] rounded-[32px] px-[22px] py-[10px] text-[16px] sm:px-[26px] sm:py-[12px] sm:text-[18px] opacity-80 hover:opacity-100 transition-opacity"><?php esc_html_e( 'WORKS', 'nab-portfolio' ); ?></a></li>
-			<li><a href="#contact" data-nav-link class="nav-link inline-block border border-[#ffffff] rounded-[32px] px-[22px] py-[10px] text-[16px] sm:px-[26px] sm:py-[12px] sm:text-[18px] opacity-80 hover:opacity-100 transition-opacity"><?php esc_html_e( 'CONTACT', 'nab-portfolio' ); ?></a></li>
+			<li><a href="<?php echo esc_url( is_front_page() ? '#works' : home_url( '/#works' ) ); ?>" data-nav-link class="nav-link inline-block border border-[#ffffff] rounded-[32px] px-[22px] py-[10px] text-[16px] sm:px-[26px] sm:py-[12px] sm:text-[18px] opacity-80 hover:opacity-100 transition-opacity"><?php esc_html_e( 'WORKS', 'nab-portfolio' ); ?></a></li>
+			<li><a href="<?php echo esc_url( is_front_page() ? '#contact' : home_url( '/#contact' ) ); ?>" data-nav-link class="nav-link inline-block border border-[#ffffff] rounded-[32px] px-[22px] py-[10px] text-[16px] sm:px-[26px] sm:py-[12px] sm:text-[18px] opacity-80 hover:opacity-100 transition-opacity"><?php esc_html_e( 'CONTACT', 'nab-portfolio' ); ?></a></li>
 		</ul>
 	</nav>
 </header>
