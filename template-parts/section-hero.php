@@ -47,7 +47,7 @@ $nabp_last_index = count( $nabp_name_lines ) - 1;
 			</div>		</div>
 
 		<div class="hero-photo group relative lg:order-1 lg:h-full lg:min-h-[420px]" style="--d: 400ms">
-			<div class="hero-photo-frame absolute -inset-3 border-2 border-lime/40 rounded-[28px]" aria-hidden="true"></div>
+			<div class="hero-photo-frame absolute left-4 top-4 -right-4 -bottom-4 border-2 border-lime/40 rounded-[28px]" aria-hidden="true"></div>
 			<div class="relative h-full w-full overflow-hidden rounded-[24px]">
 				<img src="<?php echo esc_url( $nabp_photo ); ?>" alt="<?php esc_attr_e( 'Nabil Hardiansa portrait', 'nab-portfolio' ); ?>" class="w-full h-full object-cover grayscale transition-[filter] duration-500 group-hover:grayscale-0" />
 			</div>
