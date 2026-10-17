@@ -247,132 +247,21 @@ function nabp_save_meta( int $post_id ): void {
 }
 add_action( 'save_post', 'nabp_save_meta' );
 
-function nabp_seed_mock_data(): array {
-	return array(
-		'B2B Manufacturing Company Profile Redesign' => array(
-			'_nabp_cs_role'     => 'Web Developer (freelance)',
-			'_nabp_cs_client'   => 'B2B manufacturing company',
-			'_nabp_cs_period'   => '2024',
-			'_nabp_cs_stack'    => 'WordPress, PHP, Tailwind CSS',
-			'_nabp_cs_url'      => '',
-			'_nabp_cs_problem'  => '<p>The old website was stacked with page builders: Lighthouse Performance score 34, 6.2s load time, and broken layouts on mobile — even though 70% of traffic came from phones. B2B prospects left before reading a single paragraph.</p>',
-			'_nabp_cs_approach' => '<p>A performance audit showed the bottleneck was markup and assets, not the server, so the solution was deliberately conservative to keep the existing hosting: content re-mapped, design rebuilt mobile-first, and all styling replaced with a custom theme without page builders.</p>',
-			'_nabp_cs_solution' => '<p>A lightweight custom WordPress theme: semantic HTML, minified and committed CSS, responsive images, standard hosting caching, and a content structure non-technical staff can manage through WP Admin.</p>',
-			'_nabp_cs_result'   => '<p>The new site loads 5x faster and website inquiries tripled within the first two months.</p><ul><li>Lighthouse Performance: 34 → 96</li><li>Load time: 6.2s → 1.1s</li><li>Website inquiries: 3x in 2 months</li></ul>',
-		),
-		'Centralized Inventory Dashboard for a 3-Branch Retailer' => array(
-			'_nabp_cs_role'     => 'Fullstack Developer',
-			'_nabp_cs_client'   => 'Local retail, 3 branches',
-			'_nabp_cs_period'   => '2024–2025',
-			'_nabp_cs_stack'    => 'React, Node.js, PostgreSQL',
-			'_nabp_cs_url'      => '',
-			'_nabp_cs_problem'  => '<p>Stock was recorded in separate Excel files per branch and collected weekly. Monthly stock discrepancy averaged 12%, procurement was coordinated over WhatsApp, and nobody knew per-product margins until month end.</p>',
-			'_nabp_cs_approach' => '<p>One week of on-site observation before writing code: noting when bad data entered, who needed which report, and the physical flow of goods. A centralized stock data model was designed first, and the dashboard was rolled out branch by branch so the team was not forced to switch tools all at once.</p>',
-			'_nabp_cs_solution' => '<p>A real-time cross-branch stock dashboard with daily transaction sync, automatic reorder alerts when stock hits the threshold, and downloadable per-product margin reports.</p>',
-			'_nabp_cs_result'   => '<p>Stock discrepancy dropped from 12% to under 2%, and stocktaking that used to take two days now finishes in three hours.</p><ul><li>Stock discrepancy: 12% → &lt; 2%</li><li>Stocktaking time: 2 days → 3 hours</li><li>Late reorders: nearly 0 incidents</li></ul>',
-		),
-		'Online Booking System for a Local Photo Studio' => array(
-			'_nabp_cs_role'     => 'Fullstack Developer (freelance)',
-			'_nabp_cs_client'   => 'Small photo studio, Makassar',
-			'_nabp_cs_period'   => '2025',
-			'_nabp_cs_stack'    => 'Laravel, MySQL, Tailwind CSS, Alpine.js',
-			'_nabp_cs_url'      => '',
-			'_nabp_cs_problem'  => '<p>Bookings were handled through Instagram DMs: schedules often collided because there was no single source of truth, deposits were recorded manually, and client requests sank among other chats — with a 4-hour average reply time.</p>',
-			'_nabp_cs_approach' => '<p>I started from the flow, not the technology: mapping the booking steps from both the studio owner\'s and the client\'s side, then designing a three-step flow — pick a package, grab a calendar slot, pay the deposit. The MVP was built in 4 sprints with weekly feedback so UI decisions followed real habits, not assumptions.</p>',
-			'_nabp_cs_solution' => '<p>An online booking app with a real-time slot calendar, automatic deposit payment links, a compact dashboard for the studio owner, and automatic notifications to both parties. Business rules — session duration, double-booking, deposits — are centralized in one module so they can change without touching other flows.</p>',
-			'_nabp_cs_result'   => '<p>Booking response time dropped sharply and schedule collisions stopped entirely in the first three months.</p><ul><li>Booking response time: ~4 hours → &lt; 5 minutes</li><li>Schedule collisions: 0 in the first 3 months</li><li>40% of bookings arrive outside business hours — with no operator</li></ul>',
-		),
-	);
-}
 
-function nabp_seed_mock_case_studies(): void {
-	if ( get_option( 'nabp_seeded' ) ) {
-		return;
-	}
-
-	$counts = wp_count_posts( 'case_study' );
-	if ( 0 < (int) $counts->publish ) {
-		return;
-	}
-
-	foreach ( nabp_seed_mock_data() as $title => $meta ) {
-		wp_insert_post(
-			array(
-				'post_type'   => 'case_study',
-				'post_status' => 'publish',
-				'post_title'  => $title,
-				'meta_input'  => $meta,
-			)
-		);
-	}
-
-	update_option( 'nabp_seeded', 1 );
-	update_option( 'nabp_seed_version', 2 );
-}
-
-function nabp_seed_legacy_titles(): array {
-	return array(
-		'B2B Manufacturing Company Profile Redesign'                     => 'Redesign Website Company Profile Manufaktur B2B',
-		'Centralized Inventory Dashboard for a 3-Branch Retailer'         => 'Dashboard Inventory Terpusat untuk Retail 3 Cabang',
-		'Online Booking System for a Local Photo Studio'                  => 'Sistem Booking Online untuk Studio Foto Lokal',
-	);
-}
-
-function nabp_upgrade_seed_content(): void {
-	if ( 2 <= (int) get_option( 'nabp_seed_version', 1 ) ) {
-		return;
-	}
-
-	$seed    = nabp_seed_mock_data();
-	$legacy  = nabp_seed_legacy_titles();
-	$targets = array_merge( array_keys( $seed ), array_values( $legacy ) );
-
-	$posts = get_posts(
-		array(
-			'post_type'      => 'case_study',
-			'post_status'    => 'any',
-			'posts_per_page' => -1,
-			'fields'         => 'ids',
-			'no_found_rows'  => true,
-		)
-	);
-
-	foreach ( $posts as $post_id ) {
-		$title = get_the_title( $post_id );
-		if ( ! in_array( $title, $targets, true ) ) {
-			continue;
-		}
-
-		$new_title = $title;
-		foreach ( $legacy as $english => $old ) {
-			if ( $old === $title ) {
-				$new_title = $english;
-				break;
-			}
-		}
-
-		wp_update_post(
-			array(
-				'ID'         => $post_id,
-				'post_title' => $new_title,
-			)
-		);
-
-		foreach ( $seed[ $new_title ] as $key => $value ) {
-			update_post_meta( $post_id, $key, $value );
-		}
-	}
-
-	update_option( 'nabp_seed_version', 2 );
-}
-add_action( 'init', 'nabp_upgrade_seed_content', 20 );
 
 function nabp_after_switch_theme(): void {
 	nabp_register_post_types();
 	flush_rewrite_rules();
-	nabp_seed_mock_case_studies();
 }
 add_action( 'after_switch_theme', 'nabp_after_switch_theme' );
+
+function nabp_seed_titles(): array {
+	return array(
+		'B2B Manufacturing Company Profile Redesign',
+		'Centralized Inventory Dashboard for a 3-Branch Retailer',
+		'Online Booking System for a Local Photo Studio',
+	);
+}
 
 function nabp_migrate_content_english(): void {
 	if ( 3 <= (int) get_option( 'nabp_content_version', 1 ) ) {
@@ -386,8 +275,8 @@ function nabp_migrate_content_english(): void {
 		set_theme_mod( 'nabp_about_story', $defaults['nabp_about_story'] );
 	}
 
-	$seed  = nabp_seed_mock_data();
-	$posts = get_posts(
+	$titles = nabp_seed_titles();
+	$posts  = get_posts(
 		array(
 			'post_type'      => 'case_study',
 			'post_status'    => 'any',
@@ -397,7 +286,7 @@ function nabp_migrate_content_english(): void {
 	);
 
 	foreach ( $posts as $post ) {
-		if ( ! isset( $seed[ $post->post_title ] ) ) {
+		if ( ! in_array( $post->post_title, $titles, true ) ) {
 			continue;
 		}
 
@@ -412,3 +301,29 @@ function nabp_migrate_content_english(): void {
 	update_option( 'nabp_content_version', 3 );
 }
 add_action( 'init', 'nabp_migrate_content_english', 30 );
+
+function nabp_delete_seed_case_studies(): void {
+	if ( 4 <= (int) get_option( 'nabp_content_version', 1 ) ) {
+		return;
+	}
+
+	$titles = nabp_seed_titles();
+	$posts  = get_posts(
+		array(
+			'post_type'      => 'case_study',
+			'post_status'    => 'any',
+			'posts_per_page' => -1,
+			'no_found_rows'  => true,
+		)
+	);
+
+	foreach ( $posts as $post ) {
+		if ( ! in_array( $post->post_title, $titles, true ) ) {
+			continue;
+		}
+		wp_delete_post( $post->ID, true );
+	}
+
+	update_option( 'nabp_content_version', 4 );
+}
+add_action( 'init', 'nabp_delete_seed_case_studies', 40 );

@@ -3,6 +3,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+if ( ! nabp_has_case_studies() ) {
+	return;
+}
+
 $nabp_items = array();
 $nabp_query = new WP_Query(
 	array(
@@ -12,57 +16,25 @@ $nabp_query = new WP_Query(
 	)
 );
 
-if ( $nabp_query->have_posts() ) {
-	while ( $nabp_query->have_posts() ) {
-		$nabp_query->the_post();
-		$nabp_items[] = array(
-			'link'    => get_permalink(),
-			'title'   => get_the_title(),
-			'summary' => nabp_case_summary( get_the_ID() ),
-			'cover'   => nabp_case_cover( get_the_ID(), count( $nabp_items ) ),
-			'stack'   => nabp_case_stack_items( get_the_ID() ),
-		);
-	}
-	wp_reset_postdata();
-} else {
-	$nabp_items = array(
-		array(
-			'link'    => '',
-			'title'   => __( 'Project 01', 'nab-portfolio' ),
-			'summary' => __( 'One-line problem summary — add a real case study via WP Admin.', 'nab-portfolio' ),
-			'cover'   => nabp_case_cover( 0, 0 ),
-			'stack'   => array(),
-		),
-		array(
-			'link'    => '',
-			'title'   => __( 'Project 02', 'nab-portfolio' ),
-			'summary' => __( 'One-line problem summary — add a real case study via WP Admin.', 'nab-portfolio' ),
-			'cover'   => nabp_case_cover( 0, 1 ),
-			'stack'   => array(),
-		),
-		array(
-			'link'    => '',
-			'title'   => __( 'Project 03', 'nab-portfolio' ),
-			'summary' => __( 'One-line problem summary — add a real case study via WP Admin.', 'nab-portfolio' ),
-			'cover'   => nabp_case_cover( 0, 2 ),
-			'stack'   => array(),
-		),
+while ( $nabp_query->have_posts() ) {
+	$nabp_query->the_post();
+	$nabp_items[] = array(
+		'link'    => get_permalink(),
+		'title'   => get_the_title(),
+		'summary' => nabp_case_summary( get_the_ID() ),
+		'cover'   => nabp_case_cover( get_the_ID(), count( $nabp_items ) ),
+		'stack'   => nabp_case_stack_items( get_the_ID() ),
 	);
 }
+wp_reset_postdata();
 ?>
 <section id="works" class="nab-container py-20 lg:py-24" aria-labelledby="works-heading">
 	<p class="font-display text-lime text-[20px] tracking-[0.08em] mb-3" data-reveal>// selected works</p>
 	<h2 id="works-heading" data-reveal-lines class="font-display text-fog text-[56px] sm:text-[64px] lg:text-[96px] leading-[0.95] mb-12">Case Studies</h2>
 
-	<div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-20" data-reveal-group>
+	<div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3" data-reveal-group>
 		<?php foreach ( $nabp_items as $nabp_item ) : ?>
-			<?php
-			$nabp_card_open = '' !== $nabp_item['link']
-				? '<a href="' . esc_url( $nabp_item['link'] ) . '" class="group block">'
-				: '<div class="group block">';
-			$nabp_card_close = '' !== $nabp_item['link'] ? '</a>' : '</div>';
-			?>
-			<?php echo $nabp_card_open; // phpcs:ignore WordPress.Security.EscapeOutput ?>
+			<a href="<?php echo esc_url( $nabp_item['link'] ); ?>" class="group block">
 				<div class="aspect-[4/3] rounded-[24px] overflow-hidden border border-fog/15 group-hover:border-lime transition-colors mb-5">
 					<img src="<?php echo esc_url( $nabp_item['cover'] ); ?>" alt="<?php echo esc_attr( $nabp_item['title'] ); ?>" class="w-full h-full object-cover group-hover:opacity-90 transition-opacity" loading="lazy" />
 				</div>
@@ -77,7 +49,7 @@ if ( $nabp_query->have_posts() ) {
 						<?php endforeach; ?>
 					</ul>
 				<?php endif; ?>
-			<?php echo $nabp_card_close; // phpcs:ignore WordPress.Security.EscapeOutput ?>
+			</a>
 		<?php endforeach; ?>
 	</div>
 </section>

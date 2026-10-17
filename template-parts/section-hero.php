@@ -38,10 +38,12 @@ $nabp_last_index = count( $nabp_name_lines ) - 1;
 						<?php esc_html_e( 'Email me', 'nab-portfolio' ); ?>
 					</a>
 				<?php endif; ?>
-				<a href="#works" class="group inline-flex items-center gap-3 border border-[#ffffff] rounded-[32px] px-[26px] py-[12px] text-[18px] opacity-80 hover:opacity-100 hover:border-lime transition">
-					<?php esc_html_e( 'See case studies', 'nab-portfolio' ); ?>
-					<span class="inline-block transition-transform group-hover:translate-x-1"><?php echo nabp_icon( 'arrow-right' ); ?></span>
-				</a>
+				<?php if ( nabp_has_case_studies() ) : ?>
+					<a href="#works" class="group inline-flex items-center gap-3 border border-[#ffffff] rounded-[32px] px-[26px] py-[12px] text-[18px] opacity-80 hover:opacity-100 hover:border-lime transition">
+						<?php esc_html_e( 'See case studies', 'nab-portfolio' ); ?>
+						<span class="inline-block transition-transform group-hover:translate-x-1"><?php echo nabp_icon( 'arrow-right' ); ?></span>
+					</a>
+				<?php endif; ?>
 			</div>		</div>
 
 		<div class="hero-photo group relative" style="--d: 400ms">

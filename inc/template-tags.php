@@ -82,3 +82,13 @@ function nabp_case_stack_items( int $post_id ): array {
 	$stack = (string) get_post_meta( $post_id, '_nabp_cs_stack', true );
 	return array_values( array_filter( array_map( 'trim', explode( ',', $stack ) ) ) );
 }
+
+function nabp_has_case_studies(): bool {
+	static $cache = null;
+	if ( null !== $cache ) {
+		return $cache;
+	}
+	$counts = wp_count_posts( 'case_study' );
+	$cache  = 0 < (int) $counts->publish;
+	return $cache;
+}
