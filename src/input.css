@@ -64,15 +64,9 @@ label,
 	height: 48px;
 	padding: 0 11px;
 	background: transparent;
-	border: 1px solid rgba( 255, 255, 255, 0.25 );
 	border-radius: 8px;
 	pointer-events: auto;
 	cursor: pointer;
-	transition: border-color 0.3s ease;
-}
-
-.nav-hamburger-btn:hover {
-	border-color: var( --color-lime );
 }
 
 .nav-fab-btn {
