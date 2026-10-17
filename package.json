@@ -5,10 +5,11 @@
 	"scripts": {
 		"build": "tailwindcss -i src/input.css -o assets/css/tailwind.css --minify",
 		"watch": "tailwindcss -i src/input.css -o assets/css/tailwind.css --watch",
-		"vendor": "node -e \"require('fs').mkdirSync('assets/js/vendor',{recursive:true});require('fs').copyFileSync('node_modules/animejs/dist/bundles/anime.umd.min.js','assets/js/vendor/anime.min.js')\""
+		"vendor": "node -e \"const fs=require('fs');fs.mkdirSync('assets/js/vendor',{recursive:true});fs.copyFileSync('node_modules/animejs/dist/bundles/anime.umd.min.js','assets/js/vendor/anime.min.js');fs.copyFileSync('node_modules/gsap/dist/gsap.min.js','assets/js/vendor/gsap.min.js');fs.copyFileSync('node_modules/gsap/dist/CustomEase.min.js','assets/js/vendor/CustomEase.min.js')\""
 	},
 	"devDependencies": {
 		"@tailwindcss/cli": "^4.1.0",
-		"animejs": "^4.5.0"
+		"animejs": "^4.5.0",
+		"gsap": "^3.13.0"
 	}
 }

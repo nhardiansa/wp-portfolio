@@ -4,6 +4,7 @@
 	const root = document.documentElement;
 	const prefersReducedMotion = window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches;
 	const animeApi = window.anime;
+	const gsapApi = window.gsap;
 	const motion = ! prefersReducedMotion && animeApi && 'function' === typeof animeApi.animate;
 
 	window.__nabpMotion = true;
@@ -62,6 +63,117 @@
 			sections.forEach( ( item ) => spy.observe( item.section ) );
 		}
 	}
+
+	if ( gsapApi ) {
+		try {
+			if ( gsapApi.registerPlugin && window.CustomEase ) {
+				gsapApi.registerPlugin( window.CustomEase );
+			}
+			if ( ! gsapApi.parseEase( 'nav-ease' ) ) {
+				if ( window.CustomEase ) {
+					window.CustomEase.create( 'nav-ease', '0.65, 0.01, 0.05, 0.99' );
+				}
+				gsapApi.defaults( { ease: 'power2.out', duration: 0.7 } );
+			}
+		} catch ( e ) {
+			gsapApi.defaults( { ease: 'power2.out', duration: 0.7 } );
+		}
+	}
+
+	const setupNavOverlay = () => {
+		const toggle = document.querySelector( '[data-nav-toggle]' );
+		const wrapper = document.getElementById( 'nav-overlay' );
+		if ( ! toggle || ! wrapper || ! gsapApi ) {
+			return;
+		}
+
+		const menu = wrapper.querySelector( '.menu-content' );
+		const overlay = wrapper.querySelector( '.overlay' );
+		const panels = wrapper.querySelectorAll( '.backdrop-layer' );
+		const links = wrapper.querySelectorAll( '.nav-link' );
+		const fadeTargets = wrapper.querySelectorAll( '[data-menu-fade]' );
+		const bars = toggle.querySelectorAll( '.nav-hamburger-bar' );
+		let isOpen = false;
+		let tl = null;
+
+		const build = () => {
+			tl = gsapApi.timeline( { paused: true, onReverseComplete: () => {
+				wrapper.style.display = 'none';
+				wrapper.setAttribute( 'data-nav', 'closed' );
+				wrapper.setAttribute( 'aria-hidden', 'true' );
+			} } );
+			tl.set( wrapper, { display: 'block' } )
+				.fromTo( overlay, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.35 }, 0 )
+				.fromTo( panels, { xPercent: 101 }, { xPercent: 0, duration: 0.575, stagger: 0.12, ease: 'nav-ease' }, 0 )
+				.fromTo( links, { yPercent: 140, rotate: 10 }, { yPercent: 0, rotate: 0, duration: 0.7, stagger: 0.05, ease: 'nav-ease' }, 0.35 )
+				.fromTo( fadeTargets, { autoAlpha: 0, yPercent: 50 }, { autoAlpha: 1, yPercent: 0, duration: 0.5, stagger: 0.04, clearProps: 'all' }, 0.55 )
+				.to( bars[ 0 ], { rotate: 45, y: 10, duration: 0.4, ease: 'power2.out' }, 0 )
+				.to( bars[ 1 ], { opacity: 0, duration: 0.3 }, 0 )
+				.to( bars[ 2 ], { rotate: -45, y: -10, duration: 0.4, ease: 'power2.out' }, 0 );
+		};
+
+		const openMenu = () => {
+			isOpen = true;
+			wrapper.setAttribute( 'data-nav', 'open' );
+			wrapper.setAttribute( 'aria-hidden', 'false' );
+			toggle.setAttribute( 'aria-expanded', 'true' );
+			document.body.style.overflow = 'hidden';
+			tl.timeScale( 1 ).play();
+		};
+
+		const closeMenu = () => {
+			isOpen = false;
+			toggle.setAttribute( 'aria-expanded', 'false' );
+			document.body.style.overflow = '';
+			tl.timeScale( 1.6 ).reverse();
+		};
+
+		build();
+		toggle.addEventListener( 'click', () => ( isOpen ? closeMenu() : openMenu() ) );
+		overlay.addEventListener( 'click', closeMenu );
+		wrapper.querySelectorAll( '.menu-list-item a' ).forEach( ( link ) => {
+			link.addEventListener( 'click', closeMenu );
+		} );
+		window.addEventListener( 'keydown', ( e ) => {
+			if ( 'Escape' === e.key && isOpen ) {
+				closeMenu();
+			}
+		} );
+
+		const shapeItems = wrapper.querySelectorAll( '.menu-list-item[data-shape]' );
+		const shapesWrap = wrapper.querySelector( '.ambient-background-shapes' );
+		shapeItems.forEach( ( item ) => {
+			const shape = shapesWrap ? shapesWrap.querySelector( `.bg-shape-${item.getAttribute( 'data-shape' )}` ) : null;
+			if ( ! shape ) {
+				return;
+			}
+			const els = shape.querySelectorAll( '.shape-element' );
+			const onEnter = () => {
+				if ( shapesWrap ) {
+					shapesWrap.querySelectorAll( '.bg-shape' ).forEach( ( s ) => s.classList.remove( 'active' ) );
+				}
+				shape.classList.add( 'active' );
+				gsapApi.fromTo( els,
+					{ scale: 0.5, opacity: 0, rotation: -10 },
+					{ scale: 1, opacity: 1, rotation: 0, duration: 0.6, stagger: 0.08, ease: 'back.out(1.7)', overwrite: 'auto' }
+				);
+			};
+			const onLeave = () => {
+				gsapApi.to( els, {
+					scale: 0.8,
+					opacity: 0,
+					duration: 0.3,
+					ease: 'power2.in',
+					onComplete: () => shape.classList.remove( 'active' ),
+					overwrite: 'auto',
+				} );
+			};
+			item.addEventListener( 'mouseenter', onEnter );
+			item.addEventListener( 'mouseleave', onLeave );
+		} );
+	};
+
+	setupNavOverlay();
 
 	const splitHeading = ( el ) => {
 		if ( ! motion ) {

@@ -40,9 +40,25 @@ function nabp_enqueue_assets(): void {
 	);
 
 	wp_enqueue_script(
+		'nabp-gsap',
+		NABP_URI . '/assets/js/vendor/gsap.min.js',
+		array(),
+		nabp_asset_version( 'assets/js/vendor/gsap.min.js' ),
+		true
+	);
+
+	wp_enqueue_script(
+		'nabp-customease',
+		NABP_URI . '/assets/js/vendor/CustomEase.min.js',
+		array( 'nabp-gsap' ),
+		nabp_asset_version( 'assets/js/vendor/CustomEase.min.js' ),
+		true
+	);
+
+	wp_enqueue_script(
 		'nabp-main',
 		NABP_URI . '/assets/js/main.js',
-		array( 'nabp-anime' ),
+		array( 'nabp-anime', 'nabp-gsap', 'nabp-customease' ),
 		nabp_asset_version( 'assets/js/main.js' ),
 		true
 	);
