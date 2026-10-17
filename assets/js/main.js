@@ -64,28 +64,28 @@
 	}
 
 	const splitHeading = ( el ) => {
-		if ( '1' === el.dataset.wordsReady || ! motion ) {
+		if ( ! motion ) {
 			return [];
 		}
-		el.style.opacity = '1';
-		const words = el.textContent.trim().split( /\s+/ ).filter( Boolean );
-		el.textContent = '';
-		const inners = [];
-		words.forEach( ( word, index ) => {
-			const mask = document.createElement( 'span' );
-			mask.className = 'heading-mask';
-			const inner = document.createElement( 'span' );
-			inner.className = 'heading-word';
-			inner.textContent = word;
-			mask.appendChild( inner );
-			el.appendChild( mask );
-			if ( index < words.length - 1 ) {
-				el.appendChild( document.createTextNode( ' ' ) );
-			}
-			inners.push( inner );
-		} );
-		el.dataset.wordsReady = '1';
-		return inners;
+		if ( '1' !== el.dataset.wordsReady ) {
+			el.style.opacity = '1';
+			const words = el.textContent.trim().split( /\s+/ ).filter( Boolean );
+			el.textContent = '';
+			words.forEach( ( word, index ) => {
+				const mask = document.createElement( 'span' );
+				mask.className = 'heading-mask';
+				const inner = document.createElement( 'span' );
+				inner.className = 'heading-word';
+				inner.textContent = word;
+				mask.appendChild( inner );
+				el.appendChild( mask );
+				if ( index < words.length - 1 ) {
+					el.appendChild( document.createTextNode( ' ' ) );
+				}
+			} );
+			el.dataset.wordsReady = '1';
+		}
+		return Array.from( el.querySelectorAll( '.heading-word' ) );
 	};
 
 	document.querySelectorAll( '[data-reveal-lines]' ).forEach( ( el ) => {
@@ -112,7 +112,7 @@
 				ease: 'outExpo',
 			} );
 
-			hero.querySelectorAll( '.hero-fade, .hero-rule, .hero-photo' ).forEach( ( el ) => {
+			hero.querySelectorAll( '.hero-fade, .hero-photo' ).forEach( ( el ) => {
 				animeApi.animate( el, {
 					opacity: [ 0, 1 ],
 					translateY: [ 16, 0 ],
@@ -121,6 +121,17 @@
 					ease: 'outQuart',
 				} );
 			} );
+
+			const rule = hero.querySelector( '.hero-rule' );
+			if ( rule ) {
+				animeApi.animate( rule, {
+					opacity: [ 0, 1 ],
+					scaleX: [ 0, 1 ],
+					duration: 1000,
+					delay: reduceInlineDelay( rule ),
+					ease: 'outExpo',
+				} );
+			}
 		}
 	}
 

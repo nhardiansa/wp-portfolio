@@ -78,6 +78,10 @@ select:focus-visible,
 	will-change: transform, opacity;
 }
 
+.hero-rule {
+	transform-origin: left;
+}
+
 @keyframes nabp-pulse {
 	0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba( 211, 253, 6, 0.45 ); }
 	50% { opacity: 0.55; box-shadow: 0 0 0 6px rgba( 211, 253, 6, 0 ); }

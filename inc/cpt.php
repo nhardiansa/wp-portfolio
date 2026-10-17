@@ -373,3 +373,42 @@ function nabp_after_switch_theme(): void {
 	nabp_seed_mock_case_studies();
 }
 add_action( 'after_switch_theme', 'nabp_after_switch_theme' );
+
+function nabp_migrate_content_english(): void {
+	if ( 3 <= (int) get_option( 'nabp_content_version', 1 ) ) {
+		return;
+	}
+
+	$story     = (string) get_theme_mod( 'nabp_about_story', '' );
+	$signature = 'pengalaman membangun aplikasi bersama tim di beberapa perusahaan';
+	if ( false !== stripos( $story, $signature ) ) {
+		$defaults = nabp_defaults();
+		set_theme_mod( 'nabp_about_story', $defaults['nabp_about_story'] );
+	}
+
+	$seed  = nabp_seed_mock_data();
+	$posts = get_posts(
+		array(
+			'post_type'      => 'case_study',
+			'post_status'    => 'any',
+			'posts_per_page' => -1,
+			'no_found_rows'  => true,
+		)
+	);
+
+	foreach ( $posts as $post ) {
+		if ( ! isset( $seed[ $post->post_title ] ) ) {
+			continue;
+		}
+
+		wp_update_post(
+			array(
+				'ID'        => $post->ID,
+				'post_name' => sanitize_title( $post->post_title ),
+			)
+		);
+	}
+
+	update_option( 'nabp_content_version', 3 );
+}
+add_action( 'init', 'nabp_migrate_content_english', 30 );
