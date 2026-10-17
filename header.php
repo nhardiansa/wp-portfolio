@@ -31,7 +31,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:bg-lime focus:text-ink focus:px-4 focus:py-2 focus:rounded-[8px] focus:font-medium"><?php esc_html_e( 'Skip to content', 'nab-portfolio' ); ?></a>
 
 <header class="nab-container relative z-50 flex items-center justify-between py-8">
-	<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="flex items-center justify-center w-10 h-12 rounded-[8px] bg-lime font-display text-ink text-2xl" aria-label="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>">N</a>
+	<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="font-display text-fog text-[24px] sm:text-[28px] leading-none tracking-[0.02em] hover:text-lime transition-colors" aria-label="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>">nhardiansa</a>
 	<button type="button" class="nav-hamburger-btn" data-nav-toggle aria-controls="nav-overlay" aria-expanded="false" aria-label="<?php esc_attr_e( 'Toggle menu', 'nab-portfolio' ); ?>">
 		<span class="nav-hamburger-bar" aria-hidden="true"></span>
 		<span class="nav-hamburger-bar" aria-hidden="true"></span>

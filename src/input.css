@@ -49,6 +49,15 @@ select:focus-visible,
 	outline-offset: 3px;
 }
 
+a,
+button,
+[role='button'],
+label,
+.nav-hamburger-btn,
+.overlay {
+	cursor: pointer;
+}
+
 .nav-hamburger-btn {
 	display: flex;
 	flex-direction: column;
@@ -60,6 +69,7 @@ select:focus-visible,
 	background: var( --color-lime );
 	border-radius: 8px;
 	pointer-events: auto;
+	cursor: pointer;
 }
 
 .nav-hamburger-bar {
