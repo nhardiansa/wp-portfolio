@@ -283,6 +283,40 @@
 		}
 	}
 
+	if ( motion && gsapApi && window.matchMedia( '(pointer: fine)' ).matches ) {
+		const heroPhoto = document.querySelector( '.hero-photo' );
+		if ( heroPhoto ) {
+			const frame = heroPhoto.querySelector( '.hero-photo-frame' );
+			const img = heroPhoto.querySelector( 'img' );
+			if ( frame && img ) {
+				gsapApi.set( frame, { x: 16, y: 16 } );
+				gsapApi.set( img, { transformPerspective: 900 } );
+
+				const frameX = gsapApi.quickTo( frame, 'x', { duration: 0.4, ease: 'power3' } );
+				const frameY = gsapApi.quickTo( frame, 'y', { duration: 0.4, ease: 'power3' } );
+				const rotX = gsapApi.quickTo( img, 'rotationX', { duration: 0.5, ease: 'power3' } );
+				const rotY = gsapApi.quickTo( img, 'rotationY', { duration: 0.5, ease: 'power3' } );
+
+				heroPhoto.addEventListener( 'mousemove', ( e ) => {
+					const rect = heroPhoto.getBoundingClientRect();
+					const px = ( e.clientX - rect.left ) / rect.width - 0.5;
+					const py = ( e.clientY - rect.top ) / rect.height - 0.5;
+					rotY( px * 7 );
+					rotX( -py * 5 );
+					frameX( 16 + px * 14 );
+					frameY( 16 + py * 14 );
+				} );
+
+				heroPhoto.addEventListener( 'mouseleave', () => {
+					rotX( 0 );
+					rotY( 0 );
+					frameX( 16 );
+					frameY( 16 );
+				} );
+			}
+		}
+	}
+
 	const revealOne = ( el ) => {
 		if ( ! motion ) {
 			return;

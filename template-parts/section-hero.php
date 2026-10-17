@@ -14,8 +14,8 @@ if ( empty( $nabp_name_lines ) ) {
 $nabp_last_index = count( $nabp_name_lines ) - 1;
 ?>
 <section id="hero" class="nab-container pt-12 pb-20 lg:pt-20 lg:pb-24" aria-labelledby="hero-name">
-	<div class="grid gap-12 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] lg:gap-3 lg:items-end">
-		<div>
+	<div class="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.35fr)] lg:gap-3">
+		<div class="lg:order-2">
 			<p class="hero-fade flex items-center gap-3 mb-6 lg:mb-8" style="--d: 60ms">
 				<span class="w-2 h-2 rounded-full bg-lime" aria-hidden="true"></span>
 				<span class="font-display text-lime text-[20px] sm:text-[24px] tracking-[0.08em]"><?php echo esc_html( nabp_mod( 'nabp_hero_tagline' ) ); ?></span>
@@ -46,10 +46,10 @@ $nabp_last_index = count( $nabp_name_lines ) - 1;
 				<?php endif; ?>
 			</div>		</div>
 
-		<div class="hero-photo group relative" style="--d: 400ms">
-			<div class="absolute -inset-3 border-2 border-lime/40 rounded-[28px] translate-x-4 translate-y-4 transition-transform duration-500 ease-out group-hover:translate-x-5 group-hover:translate-y-5" aria-hidden="true"></div>
-			<div class="relative overflow-hidden rounded-[24px]">
-				<img src="<?php echo esc_url( $nabp_photo ); ?>" alt="<?php esc_attr_e( 'Nabil Hardiansa portrait', 'nab-portfolio' ); ?>" class="w-full aspect-[4/5] object-cover grayscale transition duration-700 ease-out group-hover:grayscale-0 group-hover:scale-[1.06]" />
+		<div class="hero-photo group relative lg:order-1 lg:h-full lg:min-h-[420px]" style="--d: 400ms">
+			<div class="hero-photo-frame absolute -inset-3 border-2 border-lime/40 rounded-[28px]" aria-hidden="true"></div>
+			<div class="relative h-full w-full overflow-hidden rounded-[24px]">
+				<img src="<?php echo esc_url( $nabp_photo ); ?>" alt="<?php esc_attr_e( 'Nabil Hardiansa portrait', 'nab-portfolio' ); ?>" class="w-full h-full object-cover grayscale transition-[filter] duration-500 group-hover:grayscale-0" />
 			</div>
 			<div class="absolute bottom-4 left-4 flex items-center gap-2 bg-ink/85 backdrop-blur border border-lime/40 rounded-full px-4 py-2">
 				<span class="hero-dot w-2 h-2 rounded-full bg-lime" aria-hidden="true"></span>
